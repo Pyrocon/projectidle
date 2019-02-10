@@ -3,9 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Idle Game Project</title>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <script src="main.js" charset="utf-8" type="text/javascript"></script>
   <script src="config.js" charset="utf-8" type="text/javascript"></script>
+  <script src="interface.js" charset="utf-8" type="text/javascript"></script>
   <body>
     <p id="location">You wake up next to a campfire.</p>
     <button onclick="TakeAction()" id="action">Explore the Forest</button>
@@ -14,8 +16,8 @@
     <p id="stamina">Stamina: 10/10</p>
     <br>
     <p>Inventory:</p>
-    <p id="lumber">0 logs of lumber</p>
-    <p id="berries">0 berries</p>
-    <p id="gold">0 gold coins</p>
+    <p id="lumber" class="lumberDisplay">0 logs of lumber</p>
+    <p id="berries" class="berriesDisplay">0 berries</p>
+    <p id="gold" class="goldDisplay">0 gold coins</p>
   </body>
 </html>

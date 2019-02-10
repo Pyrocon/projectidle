@@ -2,44 +2,44 @@
 function Rest() {
   if (game.stamina.current < game.stamina.maximum) {
     game.stamina.current = Math.min(game.stamina.current + game.camp.campfire, game.stamina.maximum);
-    document.getElementById("result").innerHTML = "You are resting.";
+    UpdateActionLog("You are resting.");
   }
   else {
-    document.getElementById("result").innerHTML = "You feel well rested.";
+    UpdateActionLog("You feel well rested.");
   }
 }
 
 function ExploreForest() {
   if (game.stamina.current < game.forest.difficulty) {
-    document.getElementById("result").innerHTML = "You are tired and must return to camp.";
+    UpdateActionLog("You are tired and must return to camp.");
     TakeAction();
   } else {
     game.stamina.current -= game.forest.difficulty;
     if (game.forest.explore.lumber > Math.random()) {
-      document.getElementById("result").innerHTML = "You found some lumber.";
+      UpdateActionLog("You found some lumber.");
       game.inventory.lumber++;
-      if (game.inventory.lumber == 1) document.getElementById("lumber").innerHTML = game.inventory.lumber+" log of lumber";
-      else document.getElementById("lumber").innerHTML = game.inventory.lumber+" logs of lumber";
+      if (game.inventory.lumber == 1) UpdateDisplay("lumber",format(game.inventory.lumber)+" log of lumber");
+      else UpdateDisplay("lumber",format(game.inventory.lumber)+" logs of lumber");
     }
     else if (game.forest.explore.berries > Math.random()) {
-      document.getElementById("result").innerHTML = "You found some berries.";
+      UpdateActionLog("You found some berries.");
       game.inventory.berries++;
-      if (game.inventory.berries == 1) document.getElementById("berries").innerHTML = game.inventory.berries+" berry";
-      else document.getElementById("berries").innerHTML = game.inventory.berries+" berries";
+      if (game.inventory.berries == 1) UpdateDisplay("berries",format(game.inventory.berries)+" berry");
+      else UpdateDisplay("berries",format(game.inventory.berries)+" berries");
     }
     else if (game.forest.explore.rain > Math.random()) {
-      document.getElementById("result").innerHTML = "It starts to rain, making it more difficult to explore the forest right now.";
-      game.forest.difficulty+=0.5;
+      UpdateActionLog("It starts to rain, making it more difficult to explore the forest right now.");
+      game.forest.difficulty*=1.3;
     }
     else if (game.forest.explore.fight > Math.random()) {
-      document.getElementById("result").innerHTML = "You come across a goblin and swiftly deal with the creature.";
+      UpdateActionLog("You come across a goblin and swiftly deal with the creature.");
       game.inventory.gold++;
       game.stamina.current = Math.max(0, game.stamina.current - game.forest.difficulty);
-      if (game.inventory.gold == 1) document.getElementById("gold").innerHTML = game.inventory.berries+" gold coin";
-      else document.getElementById("gold").innerHTML = game.inventory.berries+" gold coins";
+      if (game.inventory.gold == 1) UpdateDisplay("gold",format(game.inventory.gold)+" gold coin");
+      else UpdateDisplay("gold",format(game.inventory.gold)+" gold coins");
     }
     else {
-      document.getElementById("result").innerHTML = "You explore a bit, but find nothing of interest.";
+      UpdateActionLog("You explore a bit, but find nothing of interest.");
     }
     game.forest.knowledge++;
   }
@@ -48,17 +48,17 @@ function ExploreForest() {
 function TakeAction() {
   if (game.location == 0) {
     if (game.stamina.current >= game.stamina.maximum * 0.5) {
-      document.getElementById("location").innerHTML = "You are exploring in the forest.";
-      document.getElementById("action").innerHTML = "Return to Camp";
-      document.getElementById("result").innerHTML = "You set out exploring.";
+      UpdateDisplay("location","You are exploring in the forest.");
+      UpdateDisplay("action","Return to Camp");
+      UpdateActionLog("You set out exploring.");
       game.location = 1;
     } else {
-      document.getElementById("result").innerHTML = "You need to rest some more.";
+      UpdateActionLog("You need to rest some more.");
     }
   }
   else if (game.location == 1){
-    document.getElementById("location").innerHTML = "You are next to a campfire.";
-    document.getElementById("action").innerHTML = "Explore the Forest";
+    UpdateDisplay("location","You are next to a campfire.");
+    UpdateDisplay("action","Explore the Forest");
     // document.getElementById("result").innerHTML = "You are resting.";
     game.stamina.maximum = 10 + Math.floor(game.forest.knowledge/10);
     game.forest.difficulty = 1;
@@ -67,7 +67,10 @@ function TakeAction() {
 }
 
 var mainGameLoop = window.setInterval(function() {
-  document.getElementById("stamina").innerHTML = "Stamina: "+game.stamina.current+"/"+game.stamina.maximum;
+  //Adds 1 for each second offline. Doesn't do any other offline calculations at this time.
+  game.offlineTickBonus += Math.floor(Date.now()-game.lastTick);
+  game.lastTick = Date.now();
+  UpdateDisplay("stamina","Stamina: "+format(game.stamina.current)+"/"+format(game.stamina.maximum));
   if (game.location == 0) Rest();
   else if (game.location == 1) ExploreForest();
 }, 1000)

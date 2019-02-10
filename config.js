@@ -2,6 +2,11 @@ function initGame() {
   var theData = {
     // Keep at 0.0.1 until satisfied with making public in some fashion.
     version: "0.0.1",
+    interval: 1000,
+
+    // To track accumulated offline time
+    lastTick: Date.now(),
+    offlineTickBonus: 0,
 
     // Keep track of how far player can progress in a given run.
     stamina: {

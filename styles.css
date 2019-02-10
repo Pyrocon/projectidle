@@ -1,0 +1,19 @@
+body { /* no . means element type */
+  text-align: center; /* text-align centers text AND children */
+}
+
+* { /* * applies to all elements, use with caution */
+  outline: none;
+}
+
+.lumberDisplay {
+  color: green;
+}
+
+.berriesDisplay {
+  color: purple;
+}
+
+.goldDisplay {
+  color: gold;
+}
