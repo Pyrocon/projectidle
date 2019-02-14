@@ -1,10 +1,20 @@
 body { /* no . means element type */
-  text-align: center; /* text-align centers text AND children */
+  background-color: rgb(110,110,110);
 }
 
 * { /* * applies to all elements, use with caution */
   outline: none;
 }
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(.7,.7)}
+  to {opacity: 1;}
+}
+
+.fadeIn {
+  animation: fadeIn 0.8s;
+}
+
 
 .lumberDisplay {
   color: green;
@@ -15,5 +25,31 @@ body { /* no . means element type */
 }
 
 .goldDisplay {
-  color: gold;
+  color: orange;
+}
+
+.actionLog {
+  text-align: left;
+  color: black;
+}
+
+.actionLogRowEleven {
+  color: rgb(15,15,15);
+}
+.actionLogRowTwelve {
+  color: rgb(30,30,30);
+}
+.actionLogRowThirteen {
+  color: rgb(45,45,45);
+}
+.actionLogRowFourteen {
+  color: rgb(60,60,60);
+}
+.actionLogRowFifteen {
+  color: rgb(75,75,75);
+}
+
+
+.hidden {
+  display: none;
 }

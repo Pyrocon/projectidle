@@ -2,7 +2,6 @@ function initGame() {
   var theData = {
     // Keep at 0.0.1 until satisfied with making public in some fashion.
     version: "0.0.1",
-    interval: 1000,
 
     // To track accumulated offline time
     lastTick: Date.now(),
@@ -20,6 +19,7 @@ function initGame() {
     location: 0,
 
     camp: {
+      arrivalTime: Date.now(),
       campfire: 1
     },
 
@@ -49,7 +49,12 @@ function initGame() {
       damage: 0,
       accuracy: 0,
       reward: 0
+    },
+
+    options: {
+      autoExplore: true
     }
+
   }
   return theData;
 }

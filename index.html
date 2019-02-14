@@ -4,20 +4,54 @@
     <meta charset="utf-8">
     <title>Idle Game Project</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="main.js" charset="utf-8" type="text/javascript"></script>
+    <script src="config.js" charset="utf-8" type="text/javascript"></script>
+    <script src="interface.js" charset="utf-8" type="text/javascript"></script>
   </head>
-  <script src="main.js" charset="utf-8" type="text/javascript"></script>
-  <script src="config.js" charset="utf-8" type="text/javascript"></script>
-  <script src="interface.js" charset="utf-8" type="text/javascript"></script>
   <body>
-    <p id="location">You wake up next to a campfire.</p>
-    <button onclick="TakeAction()" id="action">Explore the Forest</button>
-    <p id="result">I should probably explore the forest.</p>
-    <br>
-    <p id="stamina">Stamina: 10/10</p>
-    <br>
-    <p>Inventory:</p>
-    <p id="lumber" class="lumberDisplay">0 logs of lumber</p>
-    <p id="berries" class="berriesDisplay">0 berries</p>
-    <p id="gold" class="goldDisplay">0 gold coins</p>
+    <div id="menuBar">
+      <button id="gameMenuButton" onclick="tab('gameMenu')" class="hidden">Game</button>
+      <button id="inventoryMenuButton" onclick="tab('inventoryMenu')" class="hidden">Inventory</button>
+      <button id="skillsMenuButton" onclick="tab('skillsMenu')" class="hidden">Skills</button>
+      <button id="optionsMenuButton" onclick="tab('optionsMenu')" class="hidden">Options</button>
+    </div>
+    <div id="gameMenu">
+      <p id="location">You wake up next to a campfire.</p>
+      <button onclick="MoveToLocation('forest')" id="forestMovement">Explore the Forest</button>
+      <button onclick="MoveToLocation('camp')" id="campMovement">Return to Camp</button>
+      <p id="stamina">Stamina: 10/10</p>
+      <br>
+      <div id="actionLog" class="actionLog">
+        <div id="actionLogRowFifteen" class="actionLogRowFifteen"></div>
+        <div id="actionLogRowFourteen" class="actionLogRowFourteen"></div>
+        <div id="actionLogRowThirteen" class="actionLogRowThirteen"></div>
+        <div id="actionLogRowTwelve" class="actionLogRowTwelve"></div>
+        <div id="actionLogRowEleven" class="actionLogRowEleven"></div>
+        <div id="actionLogRowTen"></div>
+        <div id="actionLogRowNine"></div>
+        <div id="actionLogRowEight"></div>
+        <div id="actionLogRowSeven"></div>
+        <div id="actionLogRowSix"></div>
+        <div id="actionLogRowFive"></div>
+        <div id="actionLogRowFour"></div>
+        <div id="actionLogRowThree"></div>
+        <div id="actionLogRowTwo"></div>
+        <div id="actionLogRowOne">I should probably explore the forest.</div>
+      </div>
+    </div>
+    <div id="inventoryMenu">
+      <p>Inventory</p>
+      <p id="lumber" class="lumberDisplay">0 logs of lumber</p>
+      <p id="berries" class="berriesDisplay">0 berries</p>
+      <p id="gold" class="goldDisplay">0 gold coins</p>
+    </div>
+    <div id="skillsMenu">
+      <p>Skills</p>
+    </div>
+    <div id="optionsMenu">
+      <p>Game Options</p>
+      <input id="optionsAutoExplore" type="checkbox" checked=true onclick="optionsConfigure('optionsAutoExplore')">
+      <label for="optionsAutoExplore"> Automatically attempt to explore the forest after resting for at least a minute.</label>
+    </div>
   </body>
 </html>
